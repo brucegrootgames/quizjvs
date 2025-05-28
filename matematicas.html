@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz de Matemáticas</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+    h1 { color: #333; }
+    .pregunta { margin-bottom: 20px; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+    button { padding: 10px 15px; border: none; background-color: #007bff; color: white; cursor: pointer; border-radius: 5px; margin-top: 10px; }
+    button:hover { background-color: #0056b3; }
+    #resultado { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Quiz de Matemáticas</h1>
+  <form id="quizForm">
+    <div id="quizContainer"></div>
+    <button type="button" onclick="corregirQuiz()">Enviar</button>
+    <div id="resultado"></div>
+    <br>
+    <button type="button" onclick="location.href='individual.html'">Volver</button>
+  </form>
+
+  <script>
+    const preguntas = [
+      { pregunta: "−3⋅(−5:5−8⋅4+7⋅9−1)", opciones: ["132", "135", "-132", "-135"], correcta: 0 },
+      { pregunta: "La cocinera prepara raciones de 120 g para 650 personas. Llegan 130 más. ¿Cuál será la nueva ración?", opciones: ["100 g", "110 g", "115 g", "120 g"], correcta: 1 },
+      { pregunta: "3x+7=16", opciones: ["3", "2", "4", "1"], correcta: 2 },
+      { pregunta: "¿Cuál es el perímetro de un triángulo con lados 5 cm, 6 cm y 6 cm?", opciones: ["17 cm", "15 cm", "16 cm", "18 cm"], correcta: 0 },
+      { pregunta: "0.6×0.7", opciones: ["0.42", "4.2", "0.007", "0.012"], correcta: 0 },
+      { pregunta: "Cambia 1567 dm³ a m³", opciones: ["1.567 m³", "15.67 m³", "0.1567 m³", "1567 m³"], correcta: 0 },
+      { pregunta: "−31+5x−4=x−1", opciones: ["7", "8", "6", "5"], correcta: 1 },
+      { pregunta: "Media de 5, 7, 9, 11 y 13", opciones: ["9", "8", "10", "11"], correcta: 0 },
+      { pregunta: "2x+3x−x", opciones: ["4x", "5x", "3x", "6x"], correcta: 0 },
+      { pregunta: "¿Cuántos lados tiene un hexágono?", opciones: ["5", "6", "7", "8"], correcta: 1 },
+      { pregunta: "Volumen de un cubo con arista 3 cm", opciones: ["9 cm³", "27 cm³", "18 cm³", "36 cm³"], correcta: 1 },
+      { pregunta: "25 + 3/10", opciones: ["7/10", "1/2", "5/10", "1/5"], correcta: 0 },
+      { pregunta: "60189 : 57", opciones: ["1055", "1056", "1057", "1058"], correcta: 2 },
+      { pregunta: "3 paquetes de 24 galletas, comes 10", opciones: ["62", "62", "72", "62"], correcta: 0 },
+      { pregunta: "7^2 − 3⋅5 + 8", opciones: ["44", "54", "49", "39"], correcta: 0 },
+      { pregunta: "Área de triángulo base 8 cm y altura 5 cm", opciones: ["40 cm²", "20 cm²", "13 cm²", "30 cm²"], correcta: 1 },
+      { pregunta: "0.889 hL a L", opciones: ["8.89 L", "88.9 L", "889 L", "0.0889 L"], correcta: 1 },
+      { pregunta: "Triángulo con lados 3 cm, 4 cm y 5 cm", opciones: ["Equilátero", "Isósceles", "Escaleno", "Rectángulo"], correcta: 3 },
+      { pregunta: "144 : 12", opciones: ["11", "12", "13", "14"], correcta: 1 },
+      { pregunta: "5x − 4 = 3x + 10", opciones: ["7", "6", "5", "4"], correcta: 0 },
+      { pregunta: "25 × 0.4", opciones: ["10", "100", "1", "0.1"], correcta: 0 },
+      { pregunta: "Perímetro de círculo radio 7 cm (π≈3.14)", opciones: ["44 cm", "22 cm", "14 cm", "28 cm"], correcta: 0 },
+      { pregunta: "¿Perímetro cuadrado con lado 10 cm?", opciones: ["40 cm", "20 cm", "30 cm", "10 cm"], correcta: 0 },
+      { pregunta: "x − 5 = 10", opciones: ["5", "10", "15", "20"], correcta: 2 },
+      { pregunta: "¿Ángulo recto?", opciones: ["90°", "180°", "45°", "60°"], correcta: 0 },
+      { pregunta: "x + y = 10 y x = 6", opciones: ["2", "4", "6", "10"], correcta: 1 },
+      { pregunta: "15 − 7.5", opciones: ["7.5", "8.5", "7", "6.5"], correcta: 0 },
+      { pregunta: "23.4 cm a km", opciones: ["0.000234 km", "0.0234 km", "0.0000234 km", "0.234 km"], correcta: 0 },
+      { pregunta: "3^3 − 2^4", opciones: ["11", "19", "1", "17"], correcta: 0 },
+      { pregunta: "4(x−2) = 16", opciones: ["6", "8", "5", "4"], correcta: 0 },
+      { pregunta: "Velocidad media 120 km en 2 h", opciones: ["40 km/h", "60 km/h", "50 km/h", "70 km/h"], correcta: 1 },
+      { pregunta: "Simplifica: 5x − 3x + 2", opciones: ["2x+2", "8x+2", "2x−2", "3x+2"], correcta: 0 },
+      { pregunta: "7.3 m² a km²", opciones: ["7.3×10⁻⁶", "7.3×10⁻³", "0.00073", "0.073"], correcta: 0 },
+      { pregunta: "2x = 12", opciones: ["4", "6", "12", "24"], correcta: 1 },
+      { pregunta: "Factoriza: x²−9", opciones: ["(x−3)(x+3)", "(x−9)(x+9)", "(x−1)(x+9)", "(x−3)²"], correcta: 0 },
+      { pregunta: "Expande: (x+2)²", opciones: ["x²+4x+4", "x²+2x+4", "x²+4", "x²+2x+2"], correcta: 0 },
+      { pregunta: "¿Se puede construir triángulo con lados 7, 10 y 5?", opciones: ["Sí", "No", "Solo con regla", "Solo con compás"], correcta: 0 },
+      { pregunta: "12+18:3×2", opciones: ["24", "30", "20", "18"], correcta: 0 },
+      { pregunta: "Área cuadrado de lado 4 cm", opciones: ["12 cm²", "16 cm²", "8 cm²", "20 cm²"], correcta: 1 },
+      { pregunta: "x en 4(x−2)=16", opciones: ["6", "8", "5", "4"], correcta: 0 },
+      { pregunta: "80% en clase y 6 temas vistos. ¿Cuántos quedan en casa?", opciones: ["1.5", "1.2", "2", "3"], correcta: 0 },
+      { pregunta: "10/3+4·(1/3:3/2+6)−5·(7−5/2)", opciones: ["-10", "10", "-15", "15"], correcta: 2 },
+      { pregunta: "5²+6²", opciones: ["36", "61", "25", "30"], correcta: 1 },
+      { pregunta: "−3×(4−7)+8", opciones: ["17", "14", "20", "13"], correcta: 0 },
+      { pregunta: "4×(3+5)−2³", opciones: ["16", "24", "20", "18"], correcta: 0 },
+      { pregunta: "3x+2x−x+4", opciones: ["4x+4", "4x", "5x+4", "6x+4"], correcta: 0 },
+      { pregunta: "7x−14=0", opciones: ["1", "2", "0", "7"], correcta: 1 },
+      { pregunta: "√81", opciones: ["9", "8", "7", "6"], correcta: 0 },
+      { pregunta: "(5×3)−(4+1)", opciones: ["10", "15", "5", "12"], correcta: 0 },
+      { pregunta: "¿Cuántos segundos hay en una hora?", opciones: ["3600", "600", "1600", "6000"], correcta: 0 }
+    ];
+
+    function corregirQuiz() {
+      let correctas = 0;
+      preguntas.forEach((p, i) => {
+        const seleccionada = document.querySelector(`input[name=p${i}]:checked`);
+        if (seleccionada && parseInt(seleccionada.value) === p.correcta) {
+          correctas++;
+        }
+      });
+      document.getElementById("resultado").innerText = `Has acertado ${correctas} de ${preguntas.length} preguntas.`;
+    }
+
+    function cargarPreguntas() {
+      const container = document.getElementById("quizContainer");
+      preguntas.forEach((p, i) => {
+        const div = document.createElement("div");
+        div.className = "pregunta";
+        div.innerHTML = `<p><strong>${i + 1}. ${p.pregunta}</strong></p>` +
+          p.opciones.map((op, j) => `
+            <label>
+              <input type="radio" name="p${i}" value="${j}"> ${op}
+            </label><br>`).join("");
+        container.appendChild(div);
+      });
+    }
+
+    window.onload = cargarPreguntas;
+  </script>
+</body>
+</html>

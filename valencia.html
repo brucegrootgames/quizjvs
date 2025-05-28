@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Valencià</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    form {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    #result {
+      font-size: 1.2em;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    button, .volver {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+    }
+    .volver {
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz de Llengua Valenciana</h1>
+  <form id="quizForm"></form>
+  <div class="button-container">
+    <button onclick="calculaResultat()" type="button">Enviar</button>
+    <div id="result"></div>
+    <a href="individual.html" class="volver">Tornar</a>
+  </div>
+
+  <script>
+    const preguntes = [
+      {q:"1. Què és un camp semàntic?",r:"B",o:["A) Un conjunt de paraules amb el mateix lexema","B) Un grup de paraules amb significat relacionat","C) Un conjunt d'adjectius","D) Una oració amb sentit complet"]},
+      {q:"2. Quin d'aquests és un substantiu col·lectiu?",r:"B",o:["A) Gos","B) Equip","C) Francesc","D) Generositat"]},
+      {q:"3. Quin gènere literari està escrit normalment en prosa?",r:"A",o:["A) Narració","B) Poesia","C) Teatre","D) Comèdia"]},
+      {q:"4. Quina és la finalitat principal de la literatura?",r:"C",o:["A) Comunicar ordres","B) Expressar idees abstractes","C) Crear bellesa","D) Descriure fets històrics"]},
+      {q:"5. Quin és un exemple de llenguatge connotatiu?",r:"B",o:["A) El gos corre","B) La mar canta cançons tristes","C) El cotxe és roig","D) Tinc una cadira"]},
+      {q:"6. Quina és una característica del llenguatge literari?",r:"D",o:["A) Objectivitat","B) Simplicitat","C) Significat únic","D) Connotació"]},
+      {q:"7. Quina de les següents paraules pertany a la família de 'mar'?",r:"C",o:["A) Medusa","B) Barca","C) Marinada","D) Alga"]},
+      {q:"8. Què és un hiperònim de 'poma', 'plàtan', 'raïm'?",r:"A",o:["A) Fruita","B) Menjar","C) Supermercat","D) Verdura"]},
+      {q:"9. Quina paraula no pertany al camp semàntic de 'neu'?",r:"C",o:["A) Fred","B) Gel","C) Llana","D) Esquí"]},
+      {q:"10. Quina opció és un substantiu abstracte?",r:"C",o:["A) Gos","B) Casa","C) Generositat","D) Cotxe"]},
+      {q:"11. Quina és una preposició correcta per expressar companyia?",r:"B",o:["A) En","B) Amb","C) De","D) Per"]},
+      {q:"12. Quina opció conté un diftong?",r:"A",o:["A) Païs","B) Sol","C) Aigua","D) Mar"]},
+      {q:"13. Quin tipus de narrador explica la història com a protagonista?",r:"C",o:["A) Tercera persona","B) Segona persona","C) Primera persona","D) Narrador testimoni"]},
+      {q:"14. Quin és un gènere literari?",r:"B",o:["A) Assaig","B) Narració","C) Enquesta","D) Informatiu"]},
+      {q:"15. Quina opció mostra una comparació?",r:"B",o:["A) El vent xiula","B) Fort com una roca","C) Els arbres dormen","D) El silenci canta"]},
+      {q:"16. Quina paraula té apòstrof correctament?",r:"A",o:["A) L’amic","B) El’estiu","C) La’història","D) El amiga"]},
+      {q:"17. Què és un adjectiu?",r:"B",o:["A) Animal","B) Verd","C) Cantar","D) Ahir"]},
+      {q:"18. Quin és un determinant demostratiu?",r:"B",o:["A) Un","B) Aquest","C) El","D) Meua"]},
+      {q:"19. Quin dels següents textos correspon al gènere teatral?",r:"C",o:["A) Una descripció de paisatge","B) Un poema","C) Un diàleg entre personatges","D) Una narració en passat"]},
+      {q:"20. Quina opció és un sinònim de 'bonic'?",r:"C",o:["A) Feo","B) Lletg","C) Formós","D) Petit"]},
+      {q:"21. Quina oració conté un epítet?",r:"B",o:["A) El riu corre veloç","B) La blanca neu cobreix la terra","C) El gos borda fort","D) La nena juga"]},
+      {q:"22. Què són les figures literàries?",r:"C",o:["A) Normes ortogràfiques","B) Regles de puntuació","C) Recursos expressius","D) Tipus de gèneres"]},
+      {q:"23. Quina forma verbal és correcte per al passat?",r:"B",o:["A) Cante","B) Cantava","C) Cantarà","D) Cant"]},
+      {q:"24. Quina opció és una metàfora?",r:"A",o:["A) Eres un lleó valent","B) Riu com una font","C) Neda com un peix","D) La lluna és rodona"]},
+      {q:"25. En quina época va nàixer el teatre?",r:"C",o:["A) Roma antiga","B) Edat Mitjana","C) Grècia antiga","D) Segle XIX"]},
+      {q:"26. Què indica la dièresi?",r:"B",o:["A) La paraula és plana","B) La vocal s'ha de pronunciar","C) Accent greu","D) Una paraula amb article"]},
+      {q:"27. Quin gènere acaba en un final feliç?",r:"B",o:["A) Tragèdia","B) Comèdia","C) Drama","D) Narració"]},
+      {q:"28. Quina és la forma correcta de l'article amb apòstrof?",r:"C",o:["A) La estiu","B) El amiga","C) L'estiu","D) La'anell"]},
+      {q:"29. Quina oració conté una personificació?",r:"B",o:["A) El sol brilla","B) El rellotge camina lent","C) L'aigua cau","D) La terra gira"]},
+      {q:"30. Quina és una paraula amb dièresi correcta?",r:"B",o:["A) Veina","B) Pingüí","C) Veineta","D) Pinguina"]},
+      {q:"31. Quina opció és un adjectiu?",r:"B",o:["A) Corre","B) Blau","C) Família","D) Riu"]},
+      {q:"32. Quin és un exemple de rima consonant?",r:"A",o:["A) Amor - flor","B) Clar - blau","C) Lluna - llum","D) Gira - volta"]},
+      {q:"33. En quin cas no s’apostrofa l’article?",r:"C",o:["A) L’amiga","B) L’home","C) El llibre","D) L’estiu"]},
+      {q:"34. Quina paraula és un epítet?",r:"B",o:["A) Blau cel","B) Foscor trista","C) Mar salada","D) Estiu càlid"]},
+      {q:"35. Quin dels següents mots és un antònim de 'content'?",r:"C",o:["A) Feliç","B) Tranquil","C) Trist","D) Gros"]},
+      {q:"36. Quina frase inclou una metàfora?",r:"B",o:["A) El cor li bategava ràpid","B) Eres un diamant entre pedres","C) Caminava lentament","D) El silenci era absolut"]},
+      {q:"37. Quina figura literària és 'plorava la pluja'?",r:"B",o:["A) Comparació","B) Personificació","C) Metàfora","D) Hipèrbole"]},
+      {q:"38. Quina paraula conté un diftong?",r:"A",o:["A) Aigua","B) Neu","C) Flor","D) Claror"]},
+      {q:"39. Quina forma verbal és futura?",r:"B",o:["A) Cante","B) Cantaré","C) Cantava","D) Cantava"]},
+      {q:"40. Quin exemple és correcte per a la sinalefa?",r:"A",o:["A) La / aigua ➝ Laigua","B) El / arbre","C) El / amic ➝ Elamic","D) Una / idea ➝ Unidea"]},
+      {q:"41. Quina paraula és un substantiu propi?",r:"B",o:["A) Gos","B) Francesc","C) Taula","D) Animal"]},
+      {q:"42. Quina opció és un determinant possessiu?",r:"B",o:["A) Aquest","B) Meua","C) Un","D) El"]},
+      {q:"43. Què és una narració?",r:"C",o:["A) Una conversa","B) Un conjunt d’instruccions","C) Un relat de fets","D) Una definició"]},
+      {q:"44. Quin text correspon a una notícia?",r:"C",o:["A) Té un final obert","B) Té estructura de poema","C) Informa de fets actuals","D) Usa només verbs en passat"]},
+      {q:"45. Quin és un exemple d’antònim prefixat?",r:"A",o:["A) Content / descontent","B) Bonic / lleig","C) Verd / blau","D) Alt / baix"]},
+      {q:"46. Què és una estrofa?",r:"B",o:["A) Una línia de poema","B) Un grup de versos","C) Un títol","D) Un refrany"]},
+      {q:"47. Quin tipus de text és una recepta?",r:"C",o:["A) Descriptiu","B) Narratiu","C) Instructiu","D) Poètic"]},
+      {q:"48. Quina és una característica dels textos teatrals?",r:"C",o:["A) Estan escrits en vers","B) Són contats per un narrador","C) Estan escrits en forma de diàleg","D) No tenen estructura"]},
+      {q:"49. Quin connector indica conseqüència?",r:"D",o:["A) Perquè","B) Encara que","C) Ja que","D) Per tant"]},
+      {q:"50. Quin és el gènere de la paraula 'taula'?",r:"B",o:["A) Masculí","B) Femení","C) Neutre","D) Indefinit"]}
+    ];
+
+    const form = document.getElementById("quizForm");
+    preguntes.forEach((p, index) => {
+      const div = document.createElement("div");
+      div.classList.add("question");
+      div.innerHTML = `<p>${p.q}</p>` + p.o.map((opt, i) => `
+        <div class="options">
+          <label>
+            <input type="radio" name="q${index}" value="${String.fromCharCode(65+i)}"> ${opt}
+          </label>
+        </div>`).join("");
+      form.appendChild(div);
+    });
+
+    function calculaResultat() {
+      let correctes = 0;
+      preguntes.forEach((p, index) => {
+        const opcions = document.getElementsByName("q" + index);
+        opcions.forEach(o => {
+          if (o.checked && o.value === p.r) correctes++;
+        });
+      });
+      document.getElementById("result").innerText = `Has encertat ${correctes} de ${preguntes.length} preguntes.`;
+    }
+  </script>
+</body>
+</html>

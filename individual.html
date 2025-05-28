@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selección</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 40px;
+    }
+
+    .botones {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    .boton {
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      color: white;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      text-align: center;
+      transition: background-color 0.3s;
+      width: 250px;
+    }
+
+    .boton:hover {
+      background-color: #0056b3;
+    }
+
+    .volver {
+      background-color: #6c757d;
+    }
+
+    .volver:hover {
+      background-color: #5a6268;
+    }
+  </style>
+</head>
+<body>
+  <h1>Selección</h1>
+
+  <div class="botones">
+    <a class="boton" href="valencia.html">Valencia</a>
+    <a class="boton" href="matematicas.html">Matemáticas</a>
+    <a class="boton" href="lengua.html">Lengua</a>
+    <a class="boton" href="science.html">Science</a>
+  </div>
+
+  <a class="boton volver" href="index.html">Volver</a>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Science Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .question {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #submit {
+      background-color: #4CAF50;
+      color: white;
+    }
+    #back {
+      background-color: #777;
+      color: white;
+      margin-left: 10px;
+    }
+    #result {
+      font-size: 18px;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Science Quiz</h1>
+  <form id="quizForm">
+    <div class="question">
+      <p>1. What does Earth's revolution cause?</p>
+      <label><input type="radio" name="q1" value="C"> Seasons</label><br>
+      <label><input type="radio" name="q1" value="A"> Day and night</label><br>
+      <label><input type="radio" name="q1" value="B"> Eclipses</label><br>
+      <label><input type="radio" name="q1" value="D"> Tides</label>
+    </div>
+    <div class="question">
+      <p>2. What is a planet?</p>
+      <label><input type="radio" name="q2" value="A"> A celestial body orbiting a star</label><br>
+      <label><input type="radio" name="q2" value="B"> A moon orbiting a planet</label><br>
+      <label><input type="radio" name="q2" value="C"> A burning gas</label><br>
+      <label><input type="radio" name="q2" value="D"> A giant icy rock</label>
+    </div>
+    <div class="question">
+      <p>3. What is the formula of water?</p>
+      <label><input type="radio" name="q3" value="A"> H₂O</label><br>
+      <label><input type="radio" name="q3" value="B"> CO₂</label><br>
+      <label><input type="radio" name="q3" value="C"> O₂</label><br>
+      <label><input type="radio" name="q3" value="D"> H₂SO₄</label>
+    </div>
+    <div class="question">
+      <p>4. What is the atmosphere?</p>
+      <label><input type="radio" name="q4" value="B"> Layer of gases surrounding Earth</label><br>
+      <label><input type="radio" name="q4" value="A"> The crust of Earth</label><br>
+      <label><input type="radio" name="q4" value="C"> Water on Earth</label><br>
+      <label><input type="radio" name="q4" value="D"> Fire layer in the core</label>
+    </div>
+    <div class="question">
+      <p>5. What is a comet?</p>
+      <label><input type="radio" name="q5" value="B"> A small icy body with a glowing tail</label><br>
+      <label><input type="radio" name="q5" value="A"> A planet’s moon</label><br>
+      <label><input type="radio" name="q5" value="C"> A shooting star</label><br>
+      <label><input type="radio" name="q5" value="D"> A falling asteroid</label>
+    </div>
+    <div class="question">
+      <p>6. What is the most accepted theory about the origin of the universe?</p>
+      <label><input type="radio" name="q6" value="B"> Big Bang Theory</label><br>
+      <label><input type="radio" name="q6" value="A"> Cosmic Pull Theory</label><br>
+      <label><input type="radio" name="q6" value="C"> Galactic Drift Theory</label><br>
+      <label><input type="radio" name="q6" value="D"> Steady State Theory</label>
+    </div>
+    <div class="question">
+      <p>7. What are the types of rocks?</p>
+      <label><input type="radio" name="q7" value="B"> Igneous, Sedimentary, Metamorphic</label><br>
+      <label><input type="radio" name="q7" value="A"> Mineral, Crystal, Pebble</label><br>
+      <label><input type="radio" name="q7" value="C"> Fossil, Gem, Lava</label><br>
+      <label><input type="radio" name="q7" value="D"> Crystalline, Fluid, Volcanic</label>
+    </div>
+    <div class="question">
+      <p>8. Which layer contains the ozone layer?</p>
+      <label><input type="radio" name="q8" value="A"> Stratosphere</label><br>
+      <label><input type="radio" name="q8" value="B"> Thermosphere</label><br>
+      <label><input type="radio" name="q8" value="C"> Troposphere</label><br>
+      <label><input type="radio" name="q8" value="D"> Mesosphere</label>
+    </div>
+    <div class="question">
+      <p>9. What does Earth's rotation cause?</p>
+      <label><input type="radio" name="q9" value="D"> Day and night</label><br>
+      <label><input type="radio" name="q9" value="A"> Earthquakes</label><br>
+      <label><input type="radio" name="q9" value="B"> Volcanoes</label><br>
+      <label><input type="radio" name="q9" value="C"> Seasons</label>
+    </div>
+    <div class="question">
+      <p>10. What is revolution?</p>
+      <label><input type="radio" name="q10" value="C"> Earth orbiting around the Sun</label><br>
+      <label><input type="radio" name="q10" value="A"> Earth orbiting the Moon</label><br>
+      <label><input type="radio" name="q10" value="B"> Earth spinning on its axis</label><br>
+      <label><input type="radio" name="q10" value="D"> Sun spinning on its axis</label>
+    </div>
+	    <div class="question">
+      <p>11. What are galaxies?</p>
+      <label><input type="radio" name="q11" value="A"> Groups of stars, planets, and dust</label><br>
+      <label><input type="radio" name="q11" value="B"> Small rocks in the asteroid belt</label><br>
+      <label><input type="radio" name="q11" value="C"> Single stars</label><br>
+      <label><input type="radio" name="q11" value="D"> Comets and meteors</label>
+    </div>
+    <div class="question">
+      <p>12. What is our galaxy called?</p>
+      <label><input type="radio" name="q12" value="B"> Milky Way</label><br>
+      <label><input type="radio" name="q12" value="A"> Andromeda</label><br>
+      <label><input type="radio" name="q12" value="C"> Orion</label><br>
+      <label><input type="radio" name="q12" value="D"> Solar System</label>
+    </div>
+    <div class="question">
+      <p>13. What does Earth's rotation cause?</p>
+      <label><input type="radio" name="q13" value="A"> Day and night</label><br>
+      <label><input type="radio" name="q13" value="B"> Months</label><br>
+      <label><input type="radio" name="q13" value="C"> Years</label><br>
+      <label><input type="radio" name="q13" value="D"> Phases of the moon</label>
+    </div>
+    <div class="question">
+      <p>14. How many layers are in the atmosphere?</p>
+      <label><input type="radio" name="q14" value="C"> 5</label><br>
+      <label><input type="radio" name="q14" value="A"> 3</label><br>
+      <label><input type="radio" name="q14" value="B"> 4</label><br>
+      <label><input type="radio" name="q14" value="D"> 6</label>
+    </div>
+    <div class="question">
+      <p>15. What is the coldest layer of the atmosphere?</p>
+      <label><input type="radio" name="q15" value="C"> Mesosphere</label><br>
+      <label><input type="radio" name="q15" value="A"> Troposphere</label><br>
+      <label><input type="radio" name="q15" value="B"> Thermosphere</label><br>
+      <label><input type="radio" name="q15" value="D"> Exosphere</label>
+    </div>
+    <div class="question">
+      <p>16. What causes the greenhouse effect?</p>
+      <label><input type="radio" name="q16" value="A"> Gases trapping heat</label><br>
+      <label><input type="radio" name="q16" value="B"> Cold air falling</label><br>
+      <label><input type="radio" name="q16" value="C"> Trees releasing CO2</label><br>
+      <label><input type="radio" name="q16" value="D"> Ocean currents</label>
+    </div>
+    <div class="question">
+      <p>17. What are the states of water?</p>
+      <label><input type="radio" name="q17" value="B"> Solid, Liquid, Gas</label><br>
+      <label><input type="radio" name="q17" value="A"> Oil, Water, Ice</label><br>
+      <label><input type="radio" name="q17" value="C"> Liquid, Vapor, Air</label><br>
+      <label><input type="radio" name="q17" value="D"> Liquid, Solid, Plasma</label>
+    </div>
+    <div class="question">
+      <p>18. What is sublimation?</p>
+      <label><input type="radio" name="q18" value="D"> Solid to gas</label><br>
+      <label><input type="radio" name="q18" value="A"> Gas to solid</label><br>
+      <label><input type="radio" name="q18" value="B"> Liquid to gas</label><br>
+      <label><input type="radio" name="q18" value="C"> Gas to liquid</label>
+    </div>
+    <div class="question">
+      <p>19. What are minerals?</p>
+      <label><input type="radio" name="q19" value="A"> Inorganic substances with a definite structure</label><br>
+      <label><input type="radio" name="q19" value="B"> Organic materials</label><br>
+      <label><input type="radio" name="q19" value="C"> Small pieces of rock</label><br>
+      <label><input type="radio" name="q19" value="D"> Fossils</label>
+    </div>
+    <div class="question">
+      <p>20. What is sedimentary rock?</p>
+      <label><input type="radio" name="q20" value="C"> Formed from particles</label><br>
+      <label><input type="radio" name="q20" value="A"> Formed from magma</label><br>
+      <label><input type="radio" name="q20" value="B"> Formed by lightning</label><br>
+      <label><input type="radio" name="q20" value="D"> Made in volcanoes</label>
+    </div>
+    <div class="question">
+      <p>21. What is the name of a body that orbits a planet?</p>
+      <label><input type="radio" name="q21" value="B"> Satellite</label><br>
+      <label><input type="radio" name="q21" value="A"> Asteroid</label><br>
+      <label><input type="radio" name="q21" value="C"> Star</label><br>
+      <label><input type="radio" name="q21" value="D"> Planet</label>
+    </div>
+    <div class="question">
+      <p>22. What is the outermost layer of the atmosphere?</p>
+      <label><input type="radio" name="q22" value="A"> Exosphere</label><br>
+      <label><input type="radio" name="q22" value="B"> Troposphere</label><br>
+      <label><input type="radio" name="q22" value="C"> Mesosphere</label><br>
+      <label><input type="radio" name="q22" value="D"> Stratosphere</label>
+    </div>
+    <div class="question">
+      <p>23. What causes seasons?</p>
+      <label><input type="radio" name="q23" value="D"> Revolution of Earth</label><br>
+      <label><input type="radio" name="q23" value="A"> Rotation of the Moon</label><br>
+      <label><input type="radio" name="q23" value="B"> Earth's gravity</label><br>
+      <label><input type="radio" name="q23" value="C"> Tides</label>
+    </div>
+    <div class="question">
+      <p>24. What are examples of Earth's water?</p>
+      <label><input type="radio" name="q24" value="B"> Oceans, rivers, lakes, glaciers</label><br>
+      <label><input type="radio" name="q24" value="A"> Sand, rocks, plants</label><br>
+      <label><input type="radio" name="q24" value="C"> Soil, oil, minerals</label><br>
+      <label><input type="radio" name="q24" value="D"> Mountains, hills, valleys</label>
+    </div>
+    <div class="question">
+      <p>25. What is the hydrosphere?</p>
+      <label><input type="radio" name="q25" value="A"> All the water on Earth</label><br>
+      <label><input type="radio" name="q25" value="B"> Earth’s solid surface</label><br>
+      <label><input type="radio" name="q25" value="C"> The crust</label><br>
+      <label><input type="radio" name="q25" value="D"> Clouds and sky</label>
+    </div>
+    <!-- Questions 11-25 follow same structure -->
+    <!-- Add rest as needed -->
+    <button type="button" id="submit" onclick="calculateScore()">Send</button>
+    <a href="individual.html"><button type="button" id="back">Back</button></a>
+    <div id="result"></div>
+  </form>
+
+  <script>
+    function calculateScore() {
+      const answers = {
+        q1: 'C', q2: 'A', q3: 'A', q4: 'B', q5: 'B',
+        q6: 'B', q7: 'B', q8: 'A', q9: 'D', q10: 'C' q11: 'C', q12: 'A', q13: 'A', q14: 'B', q15: 'B',
+        q16: 'B', q17: 'B', q18: 'A', q19: 'D', q20: 'C',
+        q21: 'A', q22: 'B', q23: 'A', q24: 'C', q25: 'C',
+        q26: 'A', q27: 'B', q28: 'D', q29: 'A', q30: 'C',
+        q31: 'B', q32: 'A', q33: 'D', q34: 'B', q35: 'A'
+        // Add q11 to q25 in same pattern for full quiz
+      };
+      let score = 0;
+      let total = Object.keys(answers).length;
+
+      for (let key in answers) {
+        const radios = document.getElementsByName(key);
+        for (let radio of radios) {
+          if (radio.checked && radio.value === answers[key]) {
+            score++;
+          }
+        }
+      }
+
+      document.getElementById("result").textContent = `You scored ${score} out of ${total}!`;
+    }
+  </script>
+</body>
+</html>

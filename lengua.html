@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz de Lengua</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+    }
+    .question {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    .question p {
+      margin: 0 0 10px;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    #result {
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 18px;
+      text-align: center;
+    }
+    .buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz de Lengua Valenciana</h1>
+  <form id="quizForm"></form>
+  <div class="buttons">
+    <button onclick="calcularResultado()" type="button">Enviar</button>
+    <div id="result"></div>
+    <a href="individual.html"><button type="button">Volver</button></a>
+  </div>
+
+  <script>
+    const preguntas = [
+      ["¿Qué es un texto?", ["Un conjunto de letras sueltas", "Una lista de palabras aleatorias", "Un conjunto de palabras y oraciones que transmiten un mensaje", "Un resumen de ideas sin sentido"], 2],
+      ["¿Qué propiedad textual adapta el lenguaje al lector?", ["Cohesión", "Claridad", "Corrección", "Adecuación"], 3],
+      ["La propiedad textual que conecta ideas lógicamente es...", ["Coherencia", "Claridad", "Corrección", "Estilo"], 0],
+      ["¿Cuál propiedad textual actúa como 'pegamento' entre oraciones?", ["Claridad", "Cohesión", "Corrección", "Estilo"], 1],
+      ["Un texto claro debe ser...", ["Largo y complicado", "Breve y confuso", "Claro, sencillo y directo", "Formal y técnico"], 2],
+      ["La coherencia en un texto asegura que...", ["Haya muchas palabras", "Las ideas estén desconectadas", "Las ideas sigan un orden lógico", "Haya errores ortográficos"], 2],
+      ["Un ejemplo de conectores de cohesión es:", ["Hola", "Perro", "Además", "Árbol"], 2],
+      ["Un texto adecuado cambia según...", ["El autor", "El humor del lector", "La situación comunicativa", "La longitud del texto"], 2],
+      ["El pretérito perfecto simple indica...", ["Acciones futuras", "Acciones habituales", "Acciones completadas en el pasado", "Acciones en proceso"], 2],
+      ["El pretérito imperfecto sirve para...", ["Hablar del futuro", "Expresar acciones completadas", "Describir situaciones habituales o en desarrollo", "Usar imperativos"], 2],
+      ["En un texto narrativo, la introducción presenta...", ["El desenlace", "El conflicto", "El contexto y personajes", "El narrador"], 2],
+      ["El nudo en una narración desarrolla...", ["El desenlace", "La presentación", "El conflicto principal", "El ambiente"], 2],
+      ["El desenlace en un texto narrativo...", ["Plantea nuevos personajes", "Inicia la acción", "Resuelve el conflicto", "Describe escenarios"], 2],
+      ["Un texto narrativo puede ser...", ["Solo literario", "Solo técnico", "Literario o no literario", "Científico"], 2],
+      ["El objetivo de una fábula es...", ["Describir lugares", "Transmitir una enseñanza moral", "Contar chistes", "Analizar datos"], 1],
+      ["La biografía es un texto narrativo...", ["Literario", "Descriptivo", "No literario", "Ficticio"], 2],
+      ["Los verbos del texto narrativo suelen estar en...", ["Futuro", "Presente continuo", "Pretérito perfecto simple", "Subjuntivo"], 2],
+      ["En un cuento, el narrador...", ["Da su opinión", "Guía la acción", "No aparece", "Solo describe objetos"], 1],
+      ["La cohesión textual se logra con...", ["Verbos en infinitivo", "Palabras sin sentido", "Conectores y pronombres", "Signos de exclamación"], 2],
+      ["Un ejemplo de texto no literario narrativo es...", ["Un poema", "Una fábula", "Una noticia", "Una leyenda"], 2],
+      ["El uso de descripciones en la narración ayuda a...", ["Hacerla más técnica", "Agilizar el ritmo", "Crear imágenes en el lector", "Evitar emociones"], 2],
+      ["Una leyenda mezcla elementos...", ["Científicos y técnicos", "Reales y fantásticos", "Históricos y médicos", "Abstractos y concretos"], 1],
+      ["Un cuento suele centrarse en...", ["Múltiples tramas", "Un único conflicto", "Descripciones largas", "Datos técnicos"], 1],
+      ["Los reportajes combinan...", ["Narración con opinión", "Poemas con leyendas", "Noticias con cuentos", "Opiniones personales"], 0],
+      ["El propósito de un texto narrativo es...", ["Enumerar datos", "Relatar una historia", "Explicar teorías", "Resumir textos"], 1],
+      ["Un relato tiene...", ["Hipótesis", "Descripción, acción y diálogo", "Objetividad", "Argumentos"], 1],
+      ["En una narración, el espacio se refiere a...", ["La emoción del personaje", "El lugar donde ocurre la acción", "El título del texto", "El final del cuento"], 1],
+      ["La acción narrativa es...", ["El ambiente", "El conjunto de hechos que se cuentan", "El estilo del autor", "El tipo de narrador"], 1],
+      ["El uso de conectores ayuda a...", ["Confundir al lector", "Separar las ideas", "Organizar el texto", "Cambiar de tema"], 2],
+      ["El diálogo aporta...", ["Frases sin importancia", "Voz a los personajes", "Errores ortográficos", "Citas textuales"], 1],
+      ["El texto 'Semmelweis' es...", ["Ficticio", "Una leyenda", "Una narración no literaria", "Una biografía inventada"], 2],
+      ["El texto narrativo de Semmelweis busca...", ["Convencer", "Entretener", "Informar", "Publicitar"], 2],
+      ["En el texto 'El lobito de Sierra Morena', el personaje que vence es...", ["El lobo", "El narrador", "El cordero", "La encina"], 2],
+      ["El lobo representa...", ["Astucia", "Fuerza", "Tristeza", "Cobardía"], 1],
+      ["El cordero gana gracias a...", ["Su fuerza", "Su valentía", "Su astucia", "La suerte"], 2],
+      ["El cuento del cordero y el lobo es una...", ["Narración no literaria", "Descripción", "Fábula", "Crónica"], 2],
+      ["En una descripción objetiva se usan...", ["Sentimientos", "Opiniones", "Características observables", "Juicios de valor"], 2],
+      ["La prosopografía describe...", ["Pensamientos", "Acciones", "Físicamente a una persona", "Sentimientos"], 2],
+      ["La etopeya describe...", ["Rasgos físicos", "Escenarios", "Caracteres psicológicos", "Espacios"], 2],
+      ["Un retrato combina...", ["Descripción y narración", "Prosopografía y etopeya", "Diálogos y escenas", "Escenarios y acciones"], 1],
+      ["El pretérito imperfecto se usa para...", ["Acciones concretas", "Acciones habituales", "Futuras", "Subjetivas"], 1],
+      ["Un adjetivo calificativo expresa...", ["Un verbo", "Una acción", "Una cualidad del sustantivo", "Una pregunta"], 2],
+      ["El superlativo de 'feliz' es...", ["Más feliz", "Muy feliz", "Felicísimo", "Felizmente"], 2],
+      ["El adjetivo en 'la niña alegre' es...", ["Sustantivo", "Verbo", "Adjetivo", "Artículo"], 2],
+      ["Las palabras invariables son...", ["Sustantivos", "Verbos", "Adverbios, preposiciones, conjunciones", "Artículos"], 2],
+      ["Un ejemplo de locución adverbial de tiempo es...", ["A la derecha", "De buena mañana", "Por supuesto", "A escondidas"], 1],
+      ["En la expresión 'llover insultos', se usa...", ["Sentido literal", "Sentido figurado", "Denotación", "Sinonimia"], 1],
+      ["Una frase hecha tiene...", ["Sentido literal", "Un solo significado", "Significado figurado", "Significado confuso"], 2],
+      ["'Ser un burro' es una expresión con...", ["Denotación", "Connotación negativa", "Significado literal", "Significado culto"], 1],
+      ["El significado denotativo es...", ["El más emocional", "El subjetivo", "El que aparece primero en el diccionario", "El que depende del contexto"], 2]
+    ];
+
+    const form = document.getElementById("quizForm");
+
+    preguntas.forEach((pregunta, index) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      div.innerHTML = `<p>${index + 1}. ${pregunta[0]}</p>`;
+      const opcionesDiv = document.createElement("div");
+      opcionesDiv.className = "options";
+      pregunta[1].forEach((opcion, i) => {
+        const id = `q${index}_o${i}`;
+        opcionesDiv.innerHTML += `
+          <label><input type="radio" name="q${index}" value="${i}" id="${id}" /> ${opcion}</label>
+        `;
+      });
+      div.appendChild(opcionesDiv);
+      form.appendChild(div);
+    });
+
+    function calcularResultado() {
+      let correctas = 0;
+      preguntas.forEach((pregunta, index) => {
+        const seleccionada = document.querySelector(`input[name=q${index}]:checked`);
+        if (seleccionada && parseInt(seleccionada.value) === pregunta[2]) {
+          correctas++;
+        }
+      });
+      document.getElementById("result").textContent = `Has acertado ${correctas} de ${preguntas.length} preguntas.`;
+    }
+  </script>
+</body>
+</html>
